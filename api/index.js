@@ -34,14 +34,14 @@ app.use('/api/listing', listingRouter);
 
 // Serve frontend static files in production
 if (process.env.NODE_ENV === 'production') {
-  const staticPath = path.join(__dirname, '../client/dist');
-  app.use(express.static(staticPath));
+  app.use(express.static(path.join(__dirname, '/client/dist')));
 
-  // Must come after static
   app.get('*', (req, res) => {
-    res.sendFile(path.join(staticPath, 'index.html'));
-  });
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  })
 }
+
+
 
 // Global error handler
 app.use((err, req, res, next) => {
